@@ -17,11 +17,13 @@ class AngkatanController extends Controller
         $angkatan = Angkatan::leftJoin('alumnis','angkatans.ketua_ang', '=', 'alumnis.id_alumni')
                                 ->select('angkatans.*', 'alumnis.nama')
                                 ->get();
-        return view('angkatan.angkatan', compact('angkatan','alumni'));
+        $angAng = anggota_ang::all();
+        return view('angkatan.angkatan', compact('angkatan','alumni','angAng'));
     }
 
     public function angkatanAdd(Request $request)
     {
+
         if (Angkatan::where('angkatan', $request->angkatan)->first()) {
             Toastr::warning('angkatan '. $request->angkatan .' sudah ada!','Warning',
             ["positionClass" => "toast-top-center"]);
@@ -36,7 +38,7 @@ class AngkatanController extends Controller
                 'id_angkatan'   => $uuid,
                 'nama_angkatan' => ucwords($request->nama_angkatan),
                 'angkatan'      => ucwords($request->angkatan),
-                'ketua'           => $request->ketua,
+                'ketua_ang'           => $request->ketua_ang,
              ]);
 
              Toastr::success('Data berhasil ditambahkan','Success',
@@ -48,14 +50,13 @@ class AngkatanController extends Controller
 
     public function angkatanEdit(Request $request, $id)
     {
-        // dd($request->ketua);
             $cek = Angkatan::where('id_angkatan', $id)->first();
         if ($cek) {
 
             Angkatan::where('id_angkatan', $id)->update(array(
                 'angkatan'      => ucwords($request->angkatan),
                 'nama_angkatan'      => ucwords($request->nama_angkatan),
-                'ketua'           => $request->ketua,
+                'ketua_ang'           => $request->ketua_ang,
             ));
 
                 Toastr::success('Data berhasil ditambahkan','Success',

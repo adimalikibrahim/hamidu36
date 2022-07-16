@@ -13,12 +13,13 @@
         <div class="card bg-transparent border">
             <div class="card-header bg-light border-bottom d-sm-flex justify-content-between align-items-center">
                 <h5 class="mb-0">Daftar Kordinator</h5>
-                <a href="#" class="btn btn-sm btn-primary mb-0" data-bs-toggle="modal"
-                    data-bs-target="#modalAdd">Tambah</a>
+                @unless(Auth::user()->role != 'admin')
+                <a href="#" class="btn btn-sm btn-primary mb-0" data-bs-toggle="modal" data-bs-target="#modalAdd">Tambah</a>
+                @endunless
             </div>
             <div class="card-body pb-0">
-                <div class="table-responsive border-0">
-                    <table id="example" class="table table-dark-gray align-middle mb-0 table-hover">
+                <div class="text-nowrap border-0">
+                    <table id="example" class="table dt-responsive table-dark-gray align-middle mb-0 table-hover">
                         <thead>
                             <tr class="text-center text-sm-start">
                                 <th class="border-0 rounded-start">Kordinator</th>
@@ -102,8 +103,8 @@
                                     placeholder="Enter Nama Kordinator" required>
                             </div>
                             <div class="col-12 mb-3">
-                                <label class="form-label">Nama Ketua <span class="text-danger">*</span></label>
-                                <select name="ketua_kor" class="form-select js-choice z-index-9 border-0 bg-light" required>
+                                <label class="form-label">Nama Ketua</label>
+                                <select name="ketua_kor" class="form-select js-choice z-index-9 border-0 bg-light">
                                     <option selected disabled value="">Pilih Ketua</option>
                                     @foreach ($alumni as $a)
                                         <option value="{{ $a->id_alumni }}">{{ $a->nama }}</option>

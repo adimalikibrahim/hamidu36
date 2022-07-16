@@ -12,17 +12,9 @@ use Ramsey\Uuid\Uuid;
 
 class AnggotaAngController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    // public function anggotaAng(Request $request, $id)
+    // public function __construct()
     // {
-    //     $alumni = Alumni::where('id_kordinator', null)->get();
-    //     $anggota = Alumni::where('id_kordinator', $id)->get();
-    //     $id_ang= $id;
-    //     return view('angkatan.anggotaAngkatan', compact('alumni','anggota','id_ang'));
+    //     $this->middleware('auth');
     // }
 
     public function anggotaAng(Request $request, $id)

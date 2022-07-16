@@ -69,7 +69,7 @@
                                 <option selected value="{{$alm->id_angkatan}}">
                                     {{$alm->angkatan != null ? $alm->angkatan : 'Pilih Angkatan'}}</option>
                                 @foreach ($angkatan as $a)
-                                    <option value="{{$a->id_angkatan}}">{{$a->angkatan}}</option>
+                                    <option value="{{$a->id_angkatan}}">{{$a->angkatan}} || {{ $a->nama_angkatan }}</option>
                                 @endforeach
                             </select>
                         </div>

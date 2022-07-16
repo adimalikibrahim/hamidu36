@@ -11,10 +11,10 @@ use Brian2694\Toastr\Facades\Toastr;
 
 class AnggotaKorController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     public function anggotaKor(Request $request, $id)
     {
@@ -37,6 +37,7 @@ class AnggotaKorController extends Controller
        Alumni::where('id_alumni', $request->id_alumni)->update([
         'id_kordinator' => $id
        ]);
+       
        Toastr::success('Data Berhasil diUpdate','success',
         ["positionClass" => "toast-top-center"]);
         return back();

@@ -2,7 +2,7 @@
 
 	<div class="d-flex align-items-center">
 		<a class="navbar-brand" href="/">
-			<img class="navbar-brand-item" src="{{asset('assets/images/logo-light.svg')}}" alt="">
+			<img class="navbar-brand-item" src="{{asset('assets/images/logo-light.png')}}" alt="">
 		</a>
 	</div>
 	

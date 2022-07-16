@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Alumni;
+use App\Models\anggota_kor;
+use App\Models\Angkatan;
+use App\Models\Kordinator;
 use Illuminate\Http\Request;
+use DB;
 
 class HomeController extends Controller
 {
@@ -11,10 +16,6 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     /**
      * Show the application dashboard.
@@ -23,6 +24,25 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $kordinator = Kordinator::all();
+        $angkatan = Angkatan::orderBy('angkatan', 'asc')->get();
+        $alumni = Alumni::all();
+
+        return view('home', compact('kordinator', 'alumni', 'angkatan'));
+    }
+
+    public function KordinatorChart()
+    {
+
+        $kordi = Kordinator::orderBy('kordinator', 'asc')->get();
+        foreach ($kordi as $kordi) {
+            $jumlah = Alumni::where('id_kordinator', $kordi->id_kordinator);
+            $kor[] = [
+                'x' => $kordi->kordinator,
+                'y' => $jumlah->count('id_alumni'),
+            ];
+        }
+
+        return response()->json($kor);
     }
 }

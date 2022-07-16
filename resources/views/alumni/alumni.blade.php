@@ -18,8 +18,8 @@
             </div>
 
             <div class="card-body pb-0">
-                <div class="table-responsive border-0">
-                    <table id="example" class="table table-dark-gray align-middle mb-0 table-hover">
+                <div class="text-nowrap border-0">
+                    <table id="example" class="table dt-responsive table-dark-gray align-middle mb-0 table-hover">
                         <thead>
                             <tr class="text-center">
                                 <th class="border-0 rounded-start">Nama</th>
@@ -166,10 +166,10 @@
                             <div class="col-6">
                                 <label class="form-label">Angkatan <span class="text-danger">*</span></label>
                                 <select name="id_angkatan" class="form-select js-choice z-index-9 border-0 bg-light"
-                                    required>
+                                    >
                                     <option selected disabled value="">Pilih Angkatan</option>
                                     @foreach ($angkatan as $a)
-                                        <option value="{{ $a->id_angkatan }}">{{ $a->angkatan }}</option>
+                                        <option value="{{ $a->id_angkatan }}">{{ $a->angkatan }} || {{ $a->nama_angkatan }}</option>
                                     @endforeach
                                 </select>
                             </div>

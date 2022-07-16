@@ -3,9 +3,9 @@
 			<div class="d-flex align-items-center w-100">
 
 				<div class="d-flex align-items-center d-xl-none">
-					<a class="navbar-brand" href="index.html">
-						<img class="light-mode-item navbar-brand-item h-30px" src="{{asset('assets/images/logo-mobile.svg')}}" alt="">
-						<img class="dark-mode-item navbar-brand-item h-30px" src="{{asset('assets/images/logo-mobile-light')}}.svg" alt="">
+					<a class="navbar-brand" href="/">
+						<img class="light-mode-item navbar-brand-item h-30px" src="{{asset('assets/images/logo-mobile.png')}}" alt="">
+						<img class="dark-mode-item navbar-brand-item h-30px" src="{{asset('assets/images/logo-mobile.png')}}" alt="">
 					</a>
 				</div>
 
@@ -56,7 +56,7 @@
 									</div>
 									<hr>
 								</li>
-								<li><a class="dropdown-item" href="profile"><i class="bi bi-person fa-fw me-2"></i>Edit Profile</a></li>
+								<li><a class="dropdown-item" href="/profile"><i class="bi bi-person fa-fw me-2"></i>Edit Profile</a></li>
 								{{-- <li><a class="dropdown-item" href="#"><i class="bi bi-gear fa-fw me-2"></i>Account Settings</a></li> --}}
 								{{-- <li><a class="dropdown-item" href="#"><i class="bi bi-info-circle fa-fw me-2"></i>Help</a></li> --}}
 								<li><a class="dropdown-item bg-danger-soft-hover" href="{{ route('logout') }}"

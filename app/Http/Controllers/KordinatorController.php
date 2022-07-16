@@ -11,17 +11,18 @@ use App\Models\Kordinator;
 
 class KordinatorController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     public function kordinator(){
         $alumni = Alumni::all();
         $kordinator = Kordinator::leftJoin('alumnis','kordinators.ketua_kor', '=', 'alumnis.id_alumni')
                                 ->select('kordinators.*', 'alumnis.nama')
                                 ->get();
-        return view('kordinator.kordinator', compact('kordinator','alumni'));
+        $angKor = anggota_kor::all();
+        return view('kordinator.kordinator', compact('kordinator','alumni', 'angKor'));
     }
 
     public function kordinatorHapus($id){
@@ -41,9 +42,8 @@ class KordinatorController extends Controller
     }
 
     public function kordinatorEdit(Request $request, $id){
-        $cek = Kordinator::where('id_kordinator', $id)->first();
-        dd($request);
-        if ($cek) {
+            
+        if ($id) {
 
             Kordinator::where('id_kordinator', $id)->update(array(
                 'kordinator'      => ucwords($request->kordinator),

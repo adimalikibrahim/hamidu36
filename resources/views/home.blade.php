@@ -3,7 +3,7 @@
 @section('home', 'active')
 
 @push('css')
-    {{-- {!! Charts::assets() !!} --}}
+    <link rel="stylesheet" type="text/css" href="assets/vendor/overlay-scrollbar/css/OverlayScrollbars.min.css">
 @endpush
 @section('konten')
 
@@ -81,7 +81,7 @@
     </div>
 
     <div class="row g-4 mb-4">
-        <div class="col-xxl-9">
+        <div class="col-xxl-12">
             <div class="card shadow h-100">
                 <div class="card-header p-4 border-bottom">
                     <h5 class="card-header-title">Data Kordinator</h5>
@@ -91,45 +91,54 @@
                 </div>
             </div>
         </div>
-
-        <div class="col-lg-6 col-xxl-3">
-            <div class="card shadow h-100">
-                <div class="card-header border-bottom p-4">
-                    <h5 class="card-header-title">Data Angkatan</h5>
-                </div>
-                <div class="card-body p-4">
-                    <div class="custom-scrollbar h-300px">
-                        @foreach ($angkatan as $ang)
-                            <div class="d-flex justify-content-between position-relative">
-                                <div class="d-sm-flex">
-                                    <div class="icon-lg bg-danger text-white rounded-2 flex-shrink-0">
-                                        <p><strong>{{ $alumni->where('id_angkatan', $ang->id_angkatan)->count() }}</strong>
-                                        </p>
-                                    </div>
-                                    <div class="ms-0 ms-sm-3 mt-2 mt-sm-0">
-                                        <h6 class="mb-0"><a href="#" class="stretched-link">Angkatan :
-                                                {{ $ang->angkatan }}</a>
-                                        </h6>
-                                        <p class="mb-0">Nama Angkatan : {{ $ang->nama_angkatan }}</p>
-                                        <span class="small">5 min ago</span>
+    </div>
+    <div class="card shadow h-100">
+        <div class="card-header border-bottom p-4">
+            <h5 class="card-header-title">Data Angkatan</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                @foreach ($angkatan as $ang)
+                    <div class="col-md-3 ">
+                        <div class="card card-body bg-dark bg-opacity-10 mb-4">
+                            <div class="d-sm-flex position-relative">
+                                <div class="icon-lg bg-danger text-white rounded-2 float-start me-4">
+                                    <p><strong>{{ $alumni->where('id_angkatan', $ang->id_angkatan)->count() }}</strong>
+                                    </p>
+                                </div>
+                                <div>
+                                    <div class="mb-0 d-sm-flex justify-content-sm-between align-items-center">
+                                        <div class="">
+                                            <h6 class="mb-0"><a href="/anggota-angkatan/{{ $ang->id_angkatan }}"
+                                                    class="stretched-link">Angkatan : {{ $ang->angkatan }}</a>
+                                            </h6>
+                                            <p class="mb-0">Nama Angkatan : {{ $ang->nama_angkatan }}</p>
+                                            <p class="mb-0">Ketua :
+                                                <strong>
+                                                    @foreach ($alumni->where('id_alumni', $ang->ketua_ang) as $al)
+                                                        {{ $al->nama }}
+                                                    @endforeach
+                                                </strong>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <hr>
-                        @endforeach
-
+                        </div>
                     </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
+
 
 @endsection
 
 @push('script')
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="assets/vendor/overlay-scrollbar/js/overlayscrollbars.min.js"></script>
     <script>
-        var url = 'http://127.0.0.1:8000/chart';
+        var url = '/chart';
 
         $.getJSON(url, function(response) {
             chart.updateSeries([{
