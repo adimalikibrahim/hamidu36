@@ -1,7 +1,7 @@
 {{-- ========================= EDIT ========================== --}}
-<div class="modal fade" id="modalEdit{{ $kor->id_kordinator }}" aria-hidden="true">
+<div class="modal fade" id="modalEdit{{ $kor->id_kordinator }}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
-        <form action="kordinator/{{ $kor->id_kordinator }}" method="post"> @csrf @method('patch')
+        <form action="kordinator/{{ $kor->id_kordinator }}" method="post"> @csrf @method('put')
             <div class="modal-content">
                 <div class="modal-header bg-dark">
                     <h5 class="modal-title text-white">Edit Kordinator</h5>
@@ -17,9 +17,8 @@
                         </div>
                         <div class="col-12 mb-3">
                             <label class="form-label">Nama Ketua <span class="text-danger">*</span></label>
-                            <input type="text" name="ketua_kor" value="ketua">
-                            <select name='nama' class="form-select js-choice z-index-9 border-0 bg-light">
-                                <option selected disabled value="{{$kor->id_alumni}}">{{$kor->ketua_kor}}</option>
+                            <select name="ketua_kor" class="form-select" required>
+                                <option selected disabled value="{{$kor->id_alumni}}">{{$kor->nama}}</option>
                                 @foreach ($alumni as $a)
                                     <option value="{{$a->id_alumni}}">{{$a->nama}}</option>
                                 @endforeach
@@ -61,7 +60,7 @@
                         </div>
                         {{-- <p class="small mb-0">{{date_format($kor->created_at, "d F Y")}}</p> --}}
                         <p class="small mb-0">Kordinator Hamidu dan Sawahud</p>
-                        <h6 class="mt-1">Ketua : {{ $kor->ketua_kor }}</h6>
+                        <h6 class="mt-1">Ketua : {{ $kor->nama }}</h6>
                     </div>
                 </div>
             </div>
@@ -99,8 +98,8 @@
                             </div>
                             {{-- <p class="small mb-0">{{date_format($kor->created_at, "d F Y")}}</p> --}}
                             <p class="small mb-0">Kordinator Hamidu dan Sawahud</p>
-                            <h6 class="mt-1">Ketua : {{ $kor->ketua_kor }}</h6>
-                            <input type="hidden" name="ketua" value="{{ $kor->id_alumni }}">
+                            <h6 class="mt-1">Ketua : {{ $kor->nama }}</h6>
+                            <input type="hidden" name="ketua_kor" value="{{ $kor->id_alumni }}">
                         </div>
                     </div>
                 </div>

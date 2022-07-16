@@ -21,8 +21,8 @@
                                 placeholder="Enter Nama Angkatan" value="{{ $ang->nama_angkatan }}" required>
                         </div>
                         <div class="col-12 mb-3">
-                            {{-- <label class="form-label">Nama Ketua <span class="text-danger">*</span></label> --}}
-                            <select name="ketua" class="form-select js-choice z-index-9 border-0 bg-light" required>
+                            <label class="form-label">Nama Ketua <span class="text-danger">*</span></label>
+                            <select name="ketua_ang" class="form-select" required width="100%">
                                 <option selected disabled value="{{$ang->ketua}}">{{$ang->nama}}</option>
                                 @foreach ($alumni as $a)
                                     <option value="{{$a->id_alumni}}">{{$a->nama}}</option>
@@ -68,7 +68,7 @@
                             {{-- <p class="small mb-0">{{date_format($ang->created_at, "d F Y")}}</p> --}}
                             <p class="small mb-0">Nama Angkatan : {{ $ang->nama_angkatan }}</p>
                             <h6 class="mt-1">Ketua : {{ $ang->ketua }}</h6>
-                            <input type="hidden" name="ketua" value="{{ $ang->ketua }}">
+                            <input type="hidden" name="ketua_ang" value="{{ $ang->ketua }}">
                         </div>
                     </div>
                 </div>
@@ -107,7 +107,7 @@
                         </div>
                         {{-- <p class="small mb-0">{{date_format($ang->created_at, "d F Y")}}</p> --}}
                         <p class="small mb-0">Nama Angkatan : {{ $ang->nama_angkatan }}</p>
-                        <h6 class="mt-1">Ketua : {{ $ang->ketua }}</h6>
+                        <h6 class="mt-1">Ketua : {{ $ang->nama }}</h6>
                     </div>
                 </div>
             </div>

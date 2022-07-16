@@ -17,8 +17,8 @@ class CreateAlumnisTable extends Migration
             $table->uuid('id_alumni')->primary();
             $table->char('nia', 10);
             $table->bigInteger('urut');
-            $table->string('jk');
             $table->string('nama');
+            $table->string('jk');
             $table->string('prov')->nullable();
             $table->string('kab')->nullable();
             $table->string('kec')->nullable();

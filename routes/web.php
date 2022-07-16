@@ -29,7 +29,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::group(['middleware' => 'auth', 'user', 'admin'], function(){
+Route::group(['middleware' => ['user']], function(){
     Route::get('/home', [HomeController::class, 'index'])->named('home');
     // Route::get('/profile', [DatauserController::class, 'profile'])->named('profile');
     

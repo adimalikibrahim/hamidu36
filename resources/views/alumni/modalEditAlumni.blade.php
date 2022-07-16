@@ -1,5 +1,5 @@
 {{-- ========================= EDIT ========================== --}}
-<div class="modal fade" id="modalEdit{{$alm->id_alumni}}" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="modalEdit{{$alm->id_alumni}}"  aria-hidden="true">
     <div class="modal-dialog">
         <form action="alumni/{{$alm->id_alumni}}" method="post"> @csrf @method('put')
             <div class="modal-content">
@@ -11,59 +11,62 @@
                     <div class="row">
                         <div class="col-12 mb-3">
                             <label class="form-label">Nama Lengkap <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" name="nama" value="{{$alm->nama != null ? $alm->nama : null}}" 
-                            placeholder="Enter Nama Lengkap" required>
+                            <input type="text" class="form-control" name="nama" value="{{$alm->nama}}" placeholder="Enter Nama Lengkap" required>
                         </div>
                     </div>
                     
                     <div class="row">
                         <div class="col-6 mb-3">
                             <label class="form-label">Nomor Induk Alumni</label>
-                            <input type="text" class="form-control" value="{{$alm->nia != null ? $alm->nia : null}}" disabled>
+                            <input type="text" class="form-control" value="{{$alm->nia}}" disabled>
                         </div>
                         <div class="col-6">
                             <label class="form-label">No. HP</label>
-                            <input type="text" class="form-control" placeholder="Enter No. HP" name="hp" value="{{$alm->hp != null ? $alm->hp : null}}" maxlength="13">
+                            <input type="text" class="form-control" placeholder="Enter No. HP" name="hp"  maxlength="13"
+                            value="{{$alm->hp !== null ? $alm->hp : null}}">
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-6 mb-3">
                             <label class="form-label">Provinsi</label>
-                            <input type="text" class="form-control" placeholder="Enter Provinsi" name="prov" value="{{$alm->prov != null ? $alm->prov : null}}">
+                            <input type="text" class="form-control" placeholder="Enter Provinsi" name="prov" 
+                            value="{{$alm->prov !== null ? $alm->prov : null}}">
                         </div>
                         <div class="col-6">
                             <label class="form-label">Kabupaten</label>
-                            <input type="text" class="form-control" placeholder="Enter Kabupaten" name="kab" value="{{$alm->kab != null ? $alm->kab : null}}">
+                            <input type="text" class="form-control" placeholder="Enter Kabupaten" name="kab" 
+                            value="{{$alm->kab !== null ? $alm->kab : null}}">
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-6 mb-3">
                             <label class="form-label">Kecamatan</label>
-                            <input type="text" class="form-control" placeholder="Enter Kecamatan" name="kec" value="{{$alm->kec != null ? $alm->kec : null}}">
+                            <input type="text" class="form-control" placeholder="Enter Kecamatan" name="kec" 
+                            value="{{$alm->kec !== null ? $alm->kec : null}}">
                         </div>
                         <div class="col-6">
                             <label class="form-label">Desa</label>
-                            <input type="text" class="form-control" placeholder="Enter Desa" name="desa" value="{{$alm->desa != null ? $alm->desa : null}}">
+                            <input type="text" class="form-control" placeholder="Enter Desa" name="desa" 
+                            value="{{$alm->desa !== null ? $alm->desa : null}}">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6 mb-3">
                             <label class="form-label">Kordinator <span class="text-danger">*</span></label>
-                            <select name="id_kordinator" class="form-select js-choice z-index-9 border-0 bg-light" required>
-                                {{-- <option selected value="{{$alm->id_kordinator !== null ? $alm->id_kordinator: null}}">
-                                    {{$alm->kordinator != null ? $alm->kordinator: 'Pilih Kordinator'}}</option> --}}
-                                    {{-- <option selected value="">pilih</option> --}}
+                            <select name="id_kordinator" class="form-select" required>
+                                <option selected value="{{$alm->id_kordinator}}">
+                                    {{$alm->kordinator != null ? $alm->kordinator: 'Pilih Kordinator'}}</option>
                                 @foreach ($kordinator as $a)
                                     <option value="{{$a->id_kordinator}}">{{$a->kordinator}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-6">
-                            <label class="form-label">Angkatan</label>
-                            <select name="id_angkatan" class="form-select js-choice z-index-9 border-0 bg-light">
-                                <option selected value="{{$alm->id_angkatan !== null ? $alm->id_angkatan : null}}">
+                            <label class="form-label">Angkatan <span class="text-danger">*</span></label>
+                            <select name="id_angkatan" class="form-select" required>
+                                <option selected value="{{$alm->id_angkatan}}">
                                     {{$alm->angkatan != null ? $alm->angkatan : 'Pilih Angkatan'}}</option>
                                 @foreach ($angkatan as $a)
                                     <option value="{{$a->id_angkatan}}">{{$a->angkatan}}</option>

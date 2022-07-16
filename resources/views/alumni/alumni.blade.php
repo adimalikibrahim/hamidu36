@@ -5,8 +5,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap5.min.css">
     <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/choices/css/choices.min.css')}}">
-
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/choices/css/choices.min.css') }}">
 @endpush
 @section('konten')
 
@@ -22,7 +21,7 @@
                 <div class="table-responsive border-0">
                     <table id="example" class="table table-dark-gray align-middle mb-0 table-hover">
                         <thead>
-                            <tr class="text-center text-sm-start">
+                            <tr class="text-center">
                                 <th class="border-0 rounded-start">Nama</th>
                                 <th class="border-0">NIA</th>
                                 <th class="border-0">Kordinator</th>
@@ -52,27 +51,23 @@
                                     </td>
                                     <td>{{ $alm->nia !== null ? $alm->nia : '-' }}</td>
                                     <td>
-                                        {{-- @foreach ($kordinator->where('id_kordinator',$alm->id_kordinator) as $kord)
-                                            {{$kord->kordinator !== null ? $kord->kordinator : '-' }}
-                                        @endforeach --}}
-                                        {{-- @foreach ($alm->kordinator as $item)
-                                            {{$item->ketua}}
-                                        @endforeach --}}
-                                        {{$alm->kordinator !== null ? $alm->kordinator : '-' }}
+                                        {{ $alm->kordinator !== null ? $alm->kordinator : '-' }}
                                     </td>
                                     <td>
-                                            {{$alm->angkatan !== null ? $alm->angkatan : '-' }}
+                                        {{ $alm->angkatan !== null ? $alm->angkatan : '-' }}
                                     </td>
                                     <td>
                                         <h6 class="mb-0">{{ $alm->hp !== null ? $alm->hp : '-' }}</h6>
                                     </td>
-                                    <td>
+                                    <td class="text-sm-end text-lg-end">
                                         <a href="#" class="btn btn-sm btn-info-soft mb-0" data-bs-toggle="modal"
                                             data-bs-target="#modalEdit{{ $alm->id_alumni }}">
                                             <i class="tf-icons bx bx-edit"></i>Edit</a>
-                                        <button class="btn btn-sm btn-danger-soft me-1 mb-1 mb-md-0" data-bs-toggle="modal"
+                                        @unless (Auth::user()->role != 'admin')
+                                            <button class="btn btn-sm btn-danger-soft me-1 mb-1 mb-md-0" data-bs-toggle="modal"
                                             data-bs-target="#modalHapus{{ $alm->id_alumni }}">
                                             <i class="tf-icons bx bx-trash"></i>Delete</button>
+                                        @endunless
                                     </td>
                                 </tr>
 
@@ -80,6 +75,9 @@
                             @endforeach
                         </tbody>
                     </table>
+
+
+
                 </div>
             </div>
         </div>
@@ -157,26 +155,29 @@
                         <div class="row">
                             <div class="col-6 mb-3">
                                 <label class="form-label">Kordinator <span class="text-danger">*</span></label>
-                                <select name="id_kordinator" class="form-select js-choice z-index-9 border-0 bg-light" required>
-                                    <option selected disabled value="">Pilih Ketua</option>
+                                <select name="id_kordinator" class="form-select js-choice z-index-9 border-0 bg-light"
+                                    required>
+                                    <option selected disabled value="">Pilih Kordinator</option>
                                     @foreach ($kordinator as $a)
-                                        <option value="{{$a->id_kordinator}}">{{$a->kordinator}}</option>
+                                        <option value="{{ $a->id_kordinator }}">{{ $a->kordinator }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-6">
-                                <label class="form-label">Angkatan</label>
-                                <select name="id_angkatan" class="form-select js-choice z-index-9 border-0 bg-light">
-                                    <option selected disabled value="">Pilih Ketua</option>
+                                <label class="form-label">Angkatan <span class="text-danger">*</span></label>
+                                <select name="id_angkatan" class="form-select js-choice z-index-9 border-0 bg-light"
+                                    required>
+                                    <option selected disabled value="">Pilih Angkatan</option>
                                     @foreach ($angkatan as $a)
-                                        <option value="{{$a->id_angkatan}}">{{$a->angkatan}}</option>
+                                        <option value="{{ $a->id_angkatan }}">{{ $a->angkatan }}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger-soft my-0 btn-sm" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger-soft my-0 btn-sm"
+                            data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-success my-0 btn-sm">Simpan</button>
                     </div>
                 </div>
@@ -185,19 +186,18 @@
     </div>
 
 
-
-
 @endsection
 @push('script')
     <script>
         $(document).ready(function() {
             $('#example').DataTable({
                 pageLength: 5,
-                ordering:false,
+                ordering: false,
                 lengthMenu: [
                     [5, 10, 20, -1],
                     [5, 10, 20, 50]
-                ]
+                ],
+
             });
         });
         $(document).ready(function() {
@@ -209,7 +209,7 @@
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap5.min.js"></script>
-    <script src="{{asset('assets/vendor/choices/js/choices.min.js')}}"></script>
+    <script src="{{ asset('assets/vendor/choices/js/choices.min.js') }}"></script>
     <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
     {!! Toastr::message() !!}
 @endpush

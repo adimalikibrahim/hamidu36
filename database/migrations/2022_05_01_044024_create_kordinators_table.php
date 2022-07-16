@@ -16,7 +16,7 @@ class CreateKordinatorsTable extends Migration
         Schema::create('kordinators', function (Blueprint $table) {
             $table->uuid('id_kordinator')->primary();
             $table->string('kordinator');
-            $table->string('ketua_kor');
+            $table->string('ketua_kor')->nullable();
             $table->timestamps();
         });
     }

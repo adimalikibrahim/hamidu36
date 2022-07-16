@@ -5,8 +5,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap5.min.css">
     <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/choices/css/choices.min.css')}}">
-
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/choices/css/choices.min.css') }}">
 @endpush
 @section('konten')
 
@@ -20,13 +19,14 @@
 
             <div class="card-body pb-0">
                 <div class="table-responsive border-0">
-                    <table id="example" class="table table-dark-gray align-middle p-4 mb-0 table-hover">
+                    <table id="example" class="table table-dark-gray align-middle mb-0 table-hover">
                         <thead>
                             <tr class="text-center text-sm-start">
                                 <th class="border-0 rounded-start">Angkatan</th>
-                                <th class="border-0">Nama</th>
+                                <th class="border-0">Nama Angkatan</th>
                                 <th class="border-0">Ketua</th>
-                                <th class="border-0 rounded-end">Action</th>
+                                <th class="border-0">Jumlah</th>
+                                <th class="border-0 rounded-end" width="5%">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -45,7 +45,9 @@
                                             </h6>
                                         </div>
                                     </td>
-                                    <td><h6>{{ $ang->nama_angkatan }}</h6></td>
+                                    <td>
+                                        <h6>{{ $ang->nama_angkatan }}</h6>
+                                    </td>
                                     <td>
                                         <div class="d-flex align-items-center position-relative">
                                             <div class="avatar avatar-xs mb-2 mb-md-0">
@@ -58,13 +60,21 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <a href="#" class="btn btn-sm btn-success-soft mb-0" data-bs-toggle="modal"
-                                            data-bs-target="#modalEdit{{ $ang->id_angkatan }}">
-                                            <i class="tf-icons bx bx-edit"></i>Edit</a>
-                                        <button class="btn btn-sm btn-danger-soft me-1 mb-1 mb-md-0" data-bs-toggle="modal"
-                                            data-bs-target="#modalHapus{{ $ang->id_angkatan }}">
-                                            <i class="tf-icons bx bx-trash"></i>Delete</button>
-                                        <a href="/anggota-angkatan/{{$ang->id_angkatan}}" class="btn btn-sm btn-info-soft mb-0">
+                                        <h3 class="badge bg-info">
+                                            {{ $angAng->where('id_angkatan', $ang->id_angkatan)->count() }}
+                                        </h3>
+                                    </td>
+                                    <td class="text-sm-end text-lg-end" width="5%">
+                                        @unless(Auth::user()->role != 'admin')
+                                            <a href="#" class="btn btn-sm btn-success-soft mb-0" data-bs-toggle="modal"
+                                                data-bs-target="#modalEdit{{ $ang->id_angkatan }}">
+                                                <i class="tf-icons bx bx-edit"></i>Edit</a>
+                                            <button class="btn btn-sm btn-danger-soft me-1 mb-1 mb-md-0" data-bs-toggle="modal"
+                                                data-bs-target="#modalHapus{{ $ang->id_angkatan }}">
+                                                <i class="tf-icons bx bx-trash"></i>Delete</button>
+                                        @endunless
+                                        <a href="/anggota-angkatan/{{ $ang->id_angkatan }}"
+                                            class="btn btn-sm btn-info-soft mb-0">
                                             <i class="tf-icons bx bx-edit"></i>Anggota</a>
                                     </td>
                                 </tr>
@@ -100,10 +110,10 @@
                             </div>
                             <div class="col-12 mb-3">
                                 <label class="form-label">Nama Ketua <span class="text-danger">*</span></label>
-                                <select name="ketua" class="form-select js-choice z-index-9 border-0 bg-light" required>
+                                <select name="ketua_ang" class="form-select js-choice z-index-9 border-0 bg-light" required>
                                     <option selected disabled value="">Pilih Ketua</option>
                                     @foreach ($alumni as $a)
-                                        <option value="{{$a->id_alumni}}">{{$a->nama}}</option>
+                                        <option value="{{ $a->id_alumni }}">{{ $a->nama }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -135,13 +145,16 @@
         $(document).ready(function() {
             $('.modal').appendTo($('body'));
         });
+        $(document).ready(function() {
+            $('#select2').select2();
+        });
     </script>
 
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap5.min.js"></script>
-    <script src="{{asset('assets/vendor/choices/js/choices.min.js')}}"></script>
+    <script src="{{ asset('assets/vendor/choices/js/choices.min.js') }}"></script>
     <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
     {!! Toastr::message() !!}
 @endpush

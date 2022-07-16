@@ -13,7 +13,7 @@
             <div class="card bg-transparent border">
                 <div class="card-header bg-light border-bottom d-sm-flex justify-content-between align-items-center">
                     <h5 class="mb-0">Kordinator {{$kordinator->kordinator}}</h5>
-                    <a href="#" class="btn btn-xs btn-primary mb-0" data-bs-toggle="modal"
+                    <a href="#" class="btn btn-sm btn-primary mb-0" data-bs-toggle="modal"
                         data-bs-target="#modalAdd"><i class="bi bi-file-earmark-excel"></i> Export</a>
                 </div>
                 <div class="card-body pb-0">

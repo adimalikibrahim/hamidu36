@@ -16,8 +16,8 @@ class CreateAngkatansTable extends Migration
         Schema::create('angkatans', function (Blueprint $table) {
             $table->uuid('id_angkatan')->primary();
             $table->string('angkatan');
-            $table->string('nama_angkatan');
-            $table->string('ketua_ang');
+            $table->string('nama_angkatan')->nullable();
+            $table->string('ketua_ang')->nullable();
             $table->timestamps();
         });
     }
