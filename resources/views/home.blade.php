@@ -3,7 +3,7 @@
 @section('home', 'active')
 
 @push('css')
-    <link rel="stylesheet" type="text/css" href="assets/vendor/overlay-scrollbar/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/overlay-scrollbar/css/OverlayScrollbars.min.css">
 @endpush
 @section('konten')
 
@@ -136,7 +136,7 @@
 
 @push('script')
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script src="assets/vendor/overlay-scrollbar/js/overlayscrollbars.min.js"></script>
+    <script src="/assets/vendor/overlay-scrollbar/js/overlayscrollbars.min.js"></script>
     <script>
         var url = '/chart';
 

@@ -30,7 +30,8 @@
                                 <th class="border-0 rounded-end">Action</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody></tbody>
+                        {{-- <tbody>
                             @foreach ($alumni as $alm)
                                 <tr>
                                     <td>
@@ -63,7 +64,7 @@
                                         <a href="#" class="btn btn-sm btn-info-soft mb-0" data-bs-toggle="modal"
                                             data-bs-target="#modalEdit{{ $alm->id_alumni }}">
                                             <i class="tf-icons bx bx-edit"></i>Edit</a>
-                                        @unless (Auth::user()->role != 'admin')
+                                        @unless(Auth::user()->role != 'admin')
                                             <button class="btn btn-sm btn-danger-soft me-1 mb-1 mb-md-0" data-bs-toggle="modal"
                                             data-bs-target="#modalHapus{{ $alm->id_alumni }}">
                                             <i class="tf-icons bx bx-trash"></i>Delete</button>
@@ -73,7 +74,7 @@
 
                                 @include('alumni.modalEditAlumni')
                             @endforeach
-                        </tbody>
+                        </tbody> --}}
                     </table>
 
 
@@ -83,7 +84,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modalAdd" tabindex="-1" aria-hidden="true">
+    {{-- <div class="modal fade" id="modalAdd" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <form action="alumni" method="post"> @csrf
                 <div class="modal-content">
@@ -183,12 +184,12 @@
                 </div>
             </form>
         </div>
-    </div>
+    </div> --}}
 
 
 @endsection
 @push('script')
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             $('#example').DataTable({
                 pageLength: 5,
@@ -202,6 +203,50 @@
         });
         $(document).ready(function() {
             $('.modal').appendTo($('body'));
+        });
+    </script> --}}
+
+    <script type="text/javascript">
+        $(function() {
+            var table = $('#example').DataTable({
+                pageLength: 5,
+                ordering: false,
+                lengthMenu: [
+                    [5, 10, 20, -1],
+                    [5, 10, 20, 50]
+                ],
+                processing: true,
+                serverSide: true,
+                ajax: "alumni",
+                columns: [
+                    {
+                        data: 'nama',
+                        name: 'nama'
+                    },
+                    {
+                        data: 'nia',
+                        name: 'nia'
+                    },
+                    {
+                        data: 'kordinator',
+                        name: 'kordinator',
+                    },
+                    {
+                        data: 'angkatan',
+                        name: 'angkatan',
+                    },
+                    {
+                        data: 'hp',
+                        name: 'hp',
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false
+                    },
+                ]
+            });
         });
     </script>
 

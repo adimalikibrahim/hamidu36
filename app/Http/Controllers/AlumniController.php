@@ -31,34 +31,34 @@ class AlumniController extends Controller
 
     public function alumni(Request $request)
     {
-        $angkatan = Angkatan::orderBy('angkatan', 'asc')->get();
-        $kordinator = Kordinator::orderBy('kordinator', 'asc')->get();
-        $alumni = Alumni::leftJoin('kordinators', 'kordinators.id_kordinator', '=', 'alumnis.id_kordinator')
-            ->leftJoin('angkatans', 'angkatans.id_angkatan', '=', 'alumnis.id_angkatan')
-            ->get();
-        return view('alumni.alumni', compact('alumni', 'angkatan', 'kordinator'));
+        // $angkatan = Angkatan::orderBy('angkatan', 'asc')->get();
+        // $kordinator = Kordinator::orderBy('kordinator', 'asc')->get();
+        // $alumni = Alumni::leftJoin('kordinators', 'kordinators.id_kordinator', '=', 'alumnis.id_kordinator')
+        //     ->leftJoin('angkatans', 'angkatans.id_angkatan', '=', 'alumnis.id_angkatan')
+        //     ->get();
+        // return view('alumni.alumni', compact('alumni', 'angkatan', 'kordinator'));
 
         // ========================serverside datatable yajra=============================
 
-        // if ($request->ajax()) {
-        //     $alumni = Alumni::leftJoin('kordinators', 'kordinators.id_kordinator', '=', 'alumnis.id_kordinator')
-        //         ->leftJoin('angkatans', 'angkatans.id_angkatan', '=', 'alumnis.id_angkatan')
-        //         ->get();
+        if ($request->ajax()) {
+            $alumni = Alumni::leftJoin('kordinators', 'kordinators.id_kordinator', '=', 'alumnis.id_kordinator')
+                ->leftJoin('angkatans', 'angkatans.id_angkatan', '=', 'alumnis.id_angkatan')
+                ->get();
 
-        //     return DataTables::of($alumni)
-        //         ->addIndexColumn()
-        //         ->addColumn('action', function ($row) {
+            return DataTables::of($alumni)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
 
-        //             $btn = '<a href="#" class="btn btn-sm btn-info-soft mb-0" data-bs-toggle="modal"
-        //                    data-bs-target="#modalEdit{{ $alm->id_alumni }}">
-        //                    <i class="tf-icons bx bx-edit"></i>Edit</a>';
+                    $btn = '<a href="#" class="btn btn-sm btn-info-soft mb-0" data-bs-toggle="modal"
+                           data-bs-target="#modalEdit{{ $alm->id_alumni }}">
+                           <i class="tf-icons bx bx-edit"></i>Edit</a>';
 
-        //             return $btn;
-        //         })
-        //         ->rawColumns(['action'])
-        //         ->make(true);
-        // }
-        // return view('alumni.alumni', compact('angkatan', 'kordinator'));
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+        return view('alumni.alumni');
     }
 
     public function alumniAdd(Request $request)
